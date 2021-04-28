@@ -1,0 +1,75 @@
+<div class="animate__animated animate__fadeInRight">
+
+      <h4><b>Forma de Pago</b></h4>
+
+      <ion-radio-group color="white" value="biff">
+        <ion-list-header>
+  
+
+        </ion-list-header>
+    
+        <ion-item color="white">
+          <ion-label  (click)="opcion=1">Efectivo</ion-label>
+          <ion-radio (click)="opcion=1" slot="start" value="1"></ion-radio>
+        </ion-item>
+        <ion-item color="white">
+          <ion-label  (click)="opcion=2">Tarjeta VISA</ion-label>
+          <ion-radio (click)="opcion=2" slot="start" value="2"></ion-radio>
+         
+        </ion-item>
+    
+      </ion-radio-group>
+
+
+<!--Efectivo-->
+    <span *ngIf="opcion==1">
+      <ion-card color="ligt">
+        <p><ion-icon name="cash-outline"></ion-icon>Monto a pagar: </p>
+        <ion-input (input)="validarPagina(1)" type="number" step=0.01  min="3" max="11" id="monto" class="background-input" placeholder="Monto a pagar $ "></ion-input>
+      </ion-card>
+      
+      <ion-card color="secondary"><p>No te olvidés los $100 por costos de envío!</p></ion-card>
+
+      <ion-button [disabled]="boton" (click)="cambiarPagina()">Continuar</ion-button>
+
+
+    </span>
+    <!--Tarjeta-->
+
+    <span *ngIf="opcion==2">
+      <ion-card color="ligt">
+        <p><ion-icon name="card-outline"></ion-icon>Número de tarjeta: </p>
+        <ion-input id="numeroTarjeta" required type="tel" style="background-color: rgb(228, 228, 228)" minlength="13" maxlength="19"
+        (keypress)="soloNumeros($event)" (ionChange)="formatoTarjetaCredito($event.target.value)"
+        (ionBlur)="validarVISA()"
+        [(ngModel)]="numeroTarjetaCredito" placeholder="Número tarjeta"></ion-input>
+        <p style="color:#E76F51;" id="alertaTarjetaCredito"></p>
+                   
+        <p>Nombre y Apellido del Titular: </p>
+        <ion-input id="titular" required type="text"class="background-input"
+        (input)="validarMedioTarjeta()"
+        
+                   placeholder="Nombre y apellido del titular"></ion-input>
+        
+        <p>Fecha de Vencimiento: </p>
+        <ion-input id="vencimiento" required type="text" minlength="7" maxlength="7" size="10"
+        (input)="validarMedioTarjeta()"
+                  (ionChange)="validarVencimiento()" (keypress)="soloNumeros($event)"
+                  style="background-color: rgb(228, 228, 228)" placeholder="MM/AAAA"></ion-input>
+        <p style="color:#E76F51;" id="alerta"></p>
+        <p>CVC: </p>
+        <ion-input id="cvc"       (input)="validarMedioTarjeta()"
+        [(ngModel)]="cvc" required type="text" minlength="3" maxlength="3" (keypress)="soloNumeros($event)"
+                  style="background-color: rgb(228, 228, 228)"></ion-input>
+        <br>
+      </ion-card>
+      
+
+
+      <ion-button [disabled]="boton2" (click)="cambiarPagina()">Continuar</ion-button>
+
+
+      </span>
+
+
+</div>

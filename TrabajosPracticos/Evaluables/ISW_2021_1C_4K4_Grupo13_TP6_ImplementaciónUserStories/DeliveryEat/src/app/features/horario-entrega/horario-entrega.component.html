@@ -1,0 +1,28 @@
+<div class="animate__animated animate__fadeInRight">
+
+<h4><b>Horario de Entrega</b></h4>
+
+<ion-card color="ligt">
+  <ion-item color="white">
+    <ion-label>Lo antes posible</ion-label>
+    <ion-checkbox (click)="validarPagina()" id="entregaRapida" color="primary" (checked)="!esEntregaProgramada"
+      slot="start"></ion-checkbox>
+  </ion-item>
+
+  <br>
+
+  <span *ngIf="esEntregaProgramada">
+
+    <p>Programá un horario para la entrega</p>
+    <ion-item color="white">
+      <ion-datetime done-text="Confirmar" cancel-text="Cancelar" display-format="DD/MM/YYYY HH:mm"
+        picker-format="DD/MM/YYYY HH:mm" [(ngModel)]="fechaHoraEntrega" [min]="minDate" [value]="minDate"
+        placeholder="Seleccionar día y hora"></ion-datetime>
+    </ion-item>
+
+  </span>
+</ion-card>
+
+<ion-button class="ion-margin-top" (click)="cambiarPagina(6)">Continuar</ion-button>
+<br>
+</div>

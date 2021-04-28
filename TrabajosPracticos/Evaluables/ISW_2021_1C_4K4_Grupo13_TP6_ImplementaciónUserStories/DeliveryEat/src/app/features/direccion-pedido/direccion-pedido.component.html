@@ -1,0 +1,43 @@
+<div class="animate__animated animate__fadeInRight">
+  
+  <ion-card color="ligt">
+    <p>Calle:  </p>
+    <ion-input id="calle" (keypress)="soloLetras($event)" (input)="validarDireccion()"  minlength="1" maxlength="255" class="background-input" ></ion-input>
+  </ion-card>
+
+  <ion-card color="ligt">
+    <p>Número: </p>
+    <ion-input id="numero"  type=text maxlength="10" minlength="1" (keypress)="soloNumeros($event)" (input)="validarDireccion()" class="background-input"></ion-input>
+  </ion-card>
+
+  <ion-card color="ligt">
+    <p>Ciudad: </p>
+    <ion-item color="white" >
+    <ion-select placeholder="Seleccionar Ciudad" id="ciudad" okText="Confirmar" cancelText="Cancelar" (ionChange)="validarDireccion()" class="background-input" >
+        <ion-select-option value="Cordoba">Córdoba</ion-select-option>
+        <ion-select-option value="Río Ceballos">Río Ceballos</ion-select-option>
+        <ion-select-option value="Unquillo">Unquillo</ion-select-option>
+    </ion-select>
+    </ion-item>
+
+  </ion-card>
+  <ion-card color="ligt">
+    <p>Referencias: </p>
+    <ion-input id="referencias"  minlength="1" maxlength="255" class="background-input"></ion-input>
+  </ion-card>
+
+  <br>  
+
+  <google-map height="300px"  [center]="posicion" (mapClick)="agregarMarcador($event)" >
+  <span *ngIf="pinValidado">
+  
+  <map-marker [position]="markerPositions"
+  [options]="markerOptions"></map-marker>
+  </span>
+  
+  </google-map>
+  
+  
+  <ion-button class="ion-margin-top" [disabled]="boton" id="boton2" (click)="cambiarPagina(3)">Continuar</ion-button>
+  <br>
+  </div>

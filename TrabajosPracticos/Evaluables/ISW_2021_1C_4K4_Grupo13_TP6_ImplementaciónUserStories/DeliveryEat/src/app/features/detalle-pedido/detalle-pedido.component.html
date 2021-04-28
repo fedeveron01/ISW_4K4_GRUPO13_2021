@@ -1,0 +1,29 @@
+<div class="animate__animated animate__fadeInRight">
+  <img class="anim-targ" id="imagenmoto" src="../../../assets/icon/deliveryMoto.svg" alt="deliveryMoto">
+
+  <h4 ><b>¿Qué querés pedir?</b></h4>
+  <ion-textarea id="textArea" [value]="detalle" type="text" (input)="validarPagina(1)" minlength="1" maxlength="255"
+    style="background-color: rgb(228, 228, 228)"
+    placeholder="Podes pedir todo lo que quieras, mientras entre en la mochila del repartidor..."></ion-textarea>
+
+
+
+  <ion-card class="ion-text-center ion-margin-top" color="ligt">
+    <ion-card-header>
+      <ion-card-subtitle>Aquí podes subir una imagen de los productos que necesitás!</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button size="default" color="secondary">
+        <ion-icon lazy="true" slot="start" name="image"></ion-icon>
+        <ion-label slot="end">Subir Imagen</ion-label>
+        <input type="file" class="custom-file-input" id="file-input" accept="image/jpeg, image/jpg"
+          (change)="cargarImagen($event)">
+      </ion-button>
+    </ion-card-content>
+    <img *ngFor='let url of urls' [src]="url" height="200"> <br />
+  </ion-card>
+
+  <ion-button color="primary" id="boton1" [disabled]="boton" (click)="cambiarPagina(2)">Continuar</ion-button>
+
+  <br>
+</div>

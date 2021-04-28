@@ -1,0 +1,66 @@
+<div align="center">
+  <ion-header [translucent]="false">
+    <ion-toolbar color="tertiary">
+      <ion-buttons slot="start">
+        <span *ngIf="pagina>1 && pagina <7 ">
+          <ion-back-button defaultHref="home" color="primary" (click)="cambiarPagina(pagina-1)"></ion-back-button>
+        </span>
+      </ion-buttons>
+      <ion-title>Pedí lo que sea!</ion-title>
+      <ion-progress-bar style="position: fixed;" [value]="porcentaje"></ion-progress-bar>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">Pedí lo que sea!</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <br>
+    <span *ngIf="pagina==1">
+      <app-detalle-pedido [detalle]="detalle" (nuevoDetalle)="detalle=$event" (nuevaImagen)="urls=$event" (nuevaPagina)="cambiarPagina($event)"></app-detalle-pedido>
+    </span>
+    <!--Ubicacion Comercio-->
+    <span *ngIf="pagina==2">
+      <h4><b>Punto de Retiro</b></h4>
+      <app-direccion-pedido [ubicacion]="ubicacionComercio" (nuevaUbicacion)="ubicacionComercio=$event" (nuevaPagina)="cambiarPagina($event)"></app-direccion-pedido>
+    </span>
+    <!--Ubicacion Entrega-->
+    <span *ngIf="pagina==3">
+      <h4><b>Punto de Entrega</b></h4>
+      <app-direccion-pedido [ubicacion]="ubicacionPedido" (nuevaUbicacion)="ubicacionPedido=$event" (nuevaPagina)="cambiarPagina($event+1)"></app-direccion-pedido>
+    </span>
+    <!--Medios de Pago-->
+    <span *ngIf="pagina==4">
+      <app-medios-de-pago (nuevoMedio)="medioPago=$event" (nuevaPagina)="cambiarPagina($event)"></app-medios-de-pago>
+    </span>
+    <!--Horario de Entrega-->
+    <span *ngIf="pagina==5">
+      <app-horario-entrega (nuevoHorario)="horario=$event" (nuevaPagina)="cambiarPagina($event)"></app-horario-entrega>
+    </span>
+    <!--Resumen de Pedido-->
+    <span *ngIf="pagina==6">
+        <app-resumen-pedido [ubicacionComercio]="ubicacionComercio" 
+        [ubicacionPedido]="ubicacionPedido"
+        [horario]="horario"
+        [detalle]="detalle"
+        [urls]="urls"
+        [medioPago]="medioPago" 
+        (nuevaPagina)="cambiarPagina($event)"
+        ></app-resumen-pedido>
+    </span>
+
+    <!--Fin-->
+    <span *ngIf="pagina==7">
+      <p>Pedido enviado correctamente </p>      
+      <ion-content [fullscreen]="true">
+        <img class="ion-margin-botton anim-pop" id="confirmar" src="../../../assets/icon/confirmado.svg" alt="confirmado">
+        <ion-label color="secondary">PEDIDO CONFIRMADO</ion-label>
+        <br>
+        <br>
+          <ion-button (click)="salir()" >Salir</ion-button>
+      </ion-content>
+    </span>
+
+  </ion-content>
+</div>

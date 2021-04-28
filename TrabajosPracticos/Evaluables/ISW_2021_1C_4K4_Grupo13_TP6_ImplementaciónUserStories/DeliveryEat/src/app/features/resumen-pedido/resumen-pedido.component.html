@@ -1,0 +1,72 @@
+<div class="animate__animated animate__fadeInRight">
+
+<ion-card color="primary">
+  <ion-card-header>
+      <ion-card-title>Resumen de tu Pedido</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+      <b>Productos: </b>
+      <br>
+      {{detalle}}
+      <br>
+      <span *ngIf="ubicacionComercio.direccion!='' && ubicacionComercio.ciudad!=undefined">
+      <b>Punto de Retiro: </b>
+        <br>
+          {{ubicacionComercio.direccion}}
+          {{ubicacionComercio.numero}}
+          {{ubicacionComercio.ciudad}}
+          <br>
+          {{ubicacionComercio.referencias}}
+          <br>
+      </span>
+
+      <span *ngIf="ubicacionPedido.direccion!='' && ubicacionPedido.ciudad!=undefined">
+      <b>Punto de Entrega: </b>
+        <br>
+          {{ubicacionPedido.direccion}}
+          {{ubicacionPedido.numero}}
+          {{ubicacionPedido.ciudad}}
+          <br>
+          {{ubicacionPedido.referencias}}
+          <br>
+      </span>
+      <b>Forma de Pago: </b>
+      <br>
+      {{medioPago.tipo}}
+      <br>
+      <span *ngIf="medioPago.monto > 99">
+        <p>Monto a pagar: </p>
+            ${{medioPago.monto}}
+      </span>
+      <span *ngIf="medioPago.tipo=='Tarjeta VISA' ">
+        <p>Titular tarjeta: </p>
+          {{medioPago.titular}}
+      </span>
+      <br>
+      <b>Horario de Entrega: </b>
+      <br>
+      {{horario.horario}}
+      <br>
+
+      <img [src]="urls" height="100"><br>
+  </ion-card-content>
+</ion-card><br>
+
+<span *ngIf="(ubicacionComercio.latitudPin!=null && ubicacionComercio.longitudPin!=null) || (ubicacionPedido.latitudPin!=null && ubicacionPedido.longitudPin!=null)">
+        <google-map height="300px" [center]="markerPositions">
+          <span *ngIf="ubicacionComercio.latitudPin!=null && ubicacionComercio.longitudPin!=null">
+            <map-marker [position]="{lat:ubicacionComercio.latitudPin,lng:ubicacionComercio.longitudPin}"
+                        [options]="markerOptions">
+            </map-marker>
+          </span>
+          <span *ngIf="ubicacionPedido.latitudPin!=null && ubicacionPedido.longitudPin!=null">
+            <map-marker [position]="{lat:ubicacionPedido.latitudPin,lng:ubicacionPedido.longitudPin}"
+                        [options]="{draggable: false}">
+            </map-marker>
+          </span>
+        </google-map>
+      </span>
+<span>
+  <ion-button class="ion-margin-top" (click)="cambiarPagina()">Confirmar pedido</ion-button>
+</span>
+</div>
